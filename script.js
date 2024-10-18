@@ -1,8 +1,24 @@
+/**
+ *
+ * Use npm run dev to start the app using nodemon
+ *
+ */
+
 const http = require("http");
+const hostname = "127.0.0.1";
+const PORT = 3000;
 
 http
   .createServer((req, res) => {
+    console.log(`Server running at http://${hostname}:${PORT}/`);
     switch (req.url) {
+      case "/":
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "text/html");
+        res.write('<h1 style="color: red">Hello World!</h1>');
+        res.write("<p>I wonder what else we can send...</p>");
+        break;
+
       case "/test":
         res.statusCode = 200;
         res.setHeader("Content-Type", "text/html");
@@ -28,6 +44,6 @@ http
     }
     res.end();
   })
-  .listen(3000, () => {
+  .listen(PORT, () => {
     console.log("Server running on port 3000");
   });
